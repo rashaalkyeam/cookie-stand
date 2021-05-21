@@ -1,6 +1,6 @@
 'use strict'
 let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm']
-  
+  let sales=[];
 function Salmon(nameloc,minCustPerHour,maxCustPerHour,avgCookie){
 
     this.nameloc=nameloc;
@@ -9,7 +9,10 @@ function Salmon(nameloc,minCustPerHour,maxCustPerHour,avgCookie){
     this.avgCookie=avgCookie;
     this.randomCustNumPerHour=[];
     this.salePerHour=[];
+    sales.push(this);
     this.total=0;
+
+
     this.randomCustNum = function () {
         for (let hour = 0; hour <= hours.length; hour++) {
             this.randomCustNumPerHour.push(Math.floor(Math.random() * (this.maxCustPerHour - this.minCustPerHour + 1) + this.minCustPerHour))
@@ -20,26 +23,28 @@ function Salmon(nameloc,minCustPerHour,maxCustPerHour,avgCookie){
             this.salePerHour.push(Math.ceil(this.randomCustNumPerHour[hour] * this.avgCookie))
             this.total+=this.salePerHour[hour]
         }
-    },
-
-    this.cooki = function(){
-        let container = document.getElementById('salebycons'); 
-        let h3El=document.createElement('h3');
-        container.appendChild(h3El);
-        h3El.textContent=this.nameloc;
-        let ulEl=document.createElement('ul');
-        container.appendChild(ulEl);
-        for (let i=0; i<hours.length;i++){
-            let liEl = document.createElement('li');
-            ulEl.appendChild(liEl);
-            liEl.textContent= `${hours[i]}: ${this.salePerHour[i]} cookies`;
-        }
-            let toli=document.createElement('li');
-            ulEl.appendChild(toli);
-            toli.textContent=`Total:${this.total} cookies`;
     }
-}
 
+    //this.cooki = function(){
+      //  let container = document.getElementById('salebycons'); 
+        //let h3El=document.createElement('h3');
+       // container.appendChild(h3El);
+        // h3El.textContent=this.nameloc;
+        //let ulEl=document.createElement('ul');
+        //container.appendChild(ulEl);
+        //for (let i=0; i<hours.length;i++){
+          //  let liEl = document.createElement('li');
+            //ulEl.appendChild(liEl);
+            //liEl.textContent= `${hours[i]}: ${this.salePerHour[i]} cookies`;
+        //}
+          //  let toli=document.createElement('li');
+            //ulEl.appendChild(toli);
+            //toli.textContent=`Total:${this.total} cookies`;
+    }
+
+/**
+ 
+ 
 let seattle= new Salmon('Seattle',23,65,6.3);
 seattle.randomCustNum();
 seattle.sales();
@@ -60,14 +65,62 @@ let lima= new Salmon('Lima',2,16,4.6);
 lima.randomCustNum();
 lima.sales();
 lima.cooki();
+*/
+let divEl= document.getElementById('cont');
+let tableEl= document.createElement('table');
+divEl.appendChild(tableEl);
 
-//let con=document.getElementById('salebycons1');
-//let table=document.getElementById('table');
-//tablecont.appendChild(table);
-//let tr1= document.createElement('tr');
-//table.appendChild(tr1);
-//let th1=document.createElement('th');
-//th1.textContent = 'Hours';
+
+function tableHeder(){
+let tr1= document.createElement('tr');
+tableEl.appendChild(tr1);
+let th1=document.createElement('tr');
+tr1.appendChild(th1);
+tr1.textContent='Hours';
+
+for (let i = 0; i < hours.length; i++) {
+    let th1 = document.createElement('th');
+    tr1.appendChild(th1);
+    th1.textContent= hours[i];
+    
+}
+
+let total0=document.createElement('tr');
+tr1.appendChild(total0);
+total0.textContent= 'Total';
+}
+
+tableHeder();
+
+function tableDisc(){
+let tr2=document.createElement('tr');
+tableEl.appendChild(tr2);
+
+
+    let td2=document.createElement('td');
+    tr2.appendChild(td2);  
+    td2.textContent= sales.nameloc;
+    
+
+
+
+for (let j = 0; j < hours.length; j++) {
+    let td2=document.createElement('td');
+    tr2.appendChild(td2);
+    td2.textContent= sales.randomCustNumPerHour[j];
+
+    let tr1=document.createElement('tr');
+    tableEl.appendChild(tr1);
+    let tr3=document.createElement('tr')
+    tr1.appendChild(tr3);
+    tr3.textContent=sales.total[j];
+  }
+
+}
+
+tableDisc();
+
+/** 
 let cookiesForm= document.getElementById('newLocation');
 cookiesForm.addEventListener('submit', addLoc);
 function addLoc(event){
@@ -82,3 +135,4 @@ newloc.randomCustNum();
 newloc.sales();
 newloc.cooki();
 }
+*/
