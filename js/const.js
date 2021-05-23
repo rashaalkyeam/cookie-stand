@@ -110,9 +110,9 @@ let paris=new Salmon('Paris', 20, 38, 2.3);
 paris.cooki();
 let lima=new Salmon('Lima',	2,	16,	4.6);
 lima.cooki();
-
+let tr1= document.createElement('tr');
 function tableFooter(){
-    let tr1= document.createElement('tr');
+    
     tableEl.appendChild(tr1);
     let td = document.createElement('td');
     tr1.appendChild(td);
@@ -139,7 +139,7 @@ function tableFooter(){
     td3.textContent=totalOTotal;
 }
 tableFooter();
-/** 
+
 let cookiesForm= document.getElementById('newLocation');
 cookiesForm.addEventListener('submit', addLoc);
 function addLoc(event){
@@ -150,7 +150,10 @@ let minCustPerHour=event.target.minCustPerHour.value;
 let maxCustPerHour=event.target.maxCustPerHour.value;
 let avgCookie=event.target.avgCookie.value;
 let newloc=new Salmon(namelcation,minCustPerHour,maxCustPerHour,avgCookie);
-newloc.randomCustNum();
-newloc.sales();
-newloc.cooki();*/
 
+//newloc.randomCustNum();
+//newloc.sales();
+newloc.cooki();
+tr1.innerHTML='';
+tableFooter();
+}
